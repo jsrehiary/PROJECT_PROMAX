@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <title>PROMAX - Media To The Max</title>
+    <style>
+        body {
+            background: radial-gradient(circle at left, rgba(9, 57, 5, 0.8) 10%, rgba(0, 0, 0, 1) 70%),
+                radial-gradient(circle at right, rgba(9, 57, 5, 0.8) 10%, rgba(0, 0, 0, 1) 70%);
+            background-color: #000;
+            /* Warna dasar hitam */
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* Lingkaran hijau */
+        .circle-background {
+            position: absolute;
+            width: 300px;
+            /* Sesuaikan ukuran */
+            height: 300px;
+            /* Sesuaikan ukuran */
+            background: radial-gradient(circle, rgba(9, 57, 5, 1) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            z-index: -5;
+        }
+
+        /* Posisi lingkaran */
+        .circle-1 {
+            top: 150px;
+            left: 30%;
+        }
+
+        .circle-2 {
+            top: 600px;
+            left: 70%;
+        }
+
+        .header-logo {
+            color: #51B016;
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #51B016;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Membesarkan ukuran gambar */
+        .large-poster {
+            height: 100%;
+            /* Penuhi tinggi elemen container */
+            max-height: 350px;
+            /* Batasi tinggi maksimum */
+            object-fit: cover;
+            /* Pastikan gambar tidak terdistorsi */
+        }
+
+        /* Movie Card Styling */
+        .movie-card {
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        /* Default Play Icon and Movie Info (hidden initially) */
+        .play-icon,
+        .movie-info {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* When Hovering Over the Movie Card */
+        .movie-card:hover .play-icon,
+        .movie-card:hover .movie-info {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Play Icon Styling (positioned at bottom-right) */
+        .play-icon {
+            bottom: 30px;
+            /* Jarak dari bawah */
+            right: 30px;
+            /* Jarak dari kanan */
+            z-index: 2;
+            padding: 10px;
+            background-color: #39B54A;
+            border: none;
+            cursor: pointer;
+            transform: translate(0, 0);
+        }
+
+        /* Overlay Text Styling */
+        .movie-info {
+            z-index: 1;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+            width: 100%;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            bottom: 0;
+        }
+
+        /* SLIDER */
+        .owl-carousel .item {
+            position: relative;
+            text-align: center;
+        }
+
+        .owl-carousel .item img {
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="circle-background circle-1"></div>
+    <div class="circle-background circle-2"></div>
+
+    <!-- Modal Box -->
+    <div data-bs-theme="dark" class="modal fade" id="youtubeModal" tabindex="-1" aria-labelledby="youtubeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="youtubeModalLabel">YouTube Video</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Kontainer iframe -->
+                    <div class="ratio ratio-16x9">
+                        <iframe id="youtubeVideo" src=""
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar navbar-expand-lg px-5 pt-3 bg-transparent position-sticky">
+            <div class="container-fluid">
+                <!-- Logo dan Slogan -->
+                <div class="d-flex flex-column">
+                    <a class="navbar-brand fw-bold fs-3 mb-0 text-white" href="#">
+                        PRO<span style="color: #51B016;">MAX</span>
+                    </a>
+                    <small class="text-white fw-bold py-0">Produksi Media To The Max</small>
+                </div>
+
+                <!-- Toggler untuk Mobile View -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar Konten -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
+                    <!-- Menu Tengah -->
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white active fw-bold" aria-current="page"
+                                href="./home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold border-3 mx-3 border-bottom border-light"
+                                href="./series.html">Series</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white dropdown-toggle fw-bold" href="./category.html" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Category
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./category.html">Horror</a></li>
+                                <li><a class="dropdown-item" href="./category.html">Drama</a></li>
+                                <li><a class="dropdown-item" href="./category.html">Thriller</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="./about.html">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN - Header Texting -->
+    <main class="container my-5 d-flex flex-column justify-content-center align-items-center text-center">
+        <div class="col-md-10">
+            <h1 class="fw-bold" style="font-size: 50px;">Discover the Best Series <br>
+                <span style="color: #39B54A;">Curated Just for You</span>
+            </h1>
+            <p class="mt-4">
+                Step into a world of captivating stories, unforgettable characters, and binge-worthy moments. From
+                critically acclaimed
+                moments. Form critically acclaimed dramas to heart-pounding thrillers, our collection of series are
+                handpicked to deliver the ultimate viewing experience.
+            </p>
+        </div>
+    </main>
+
+    <!-- MAIN - TRENDING NOW  -->
+    <main class="container my-5">
+        <h2 class="mb-4 fs-1 fw-bold">Trending Now</h2>
+        <div class="row g-4">
+            <!-- Movie Card 1 -->
+            <div class="col-md-6">
+                <div class="position-relative movie-card">
+                    <img src="assets/horizontal-poster/poster1.jpeg" class="img-fluid rounded w-100 large-poster"
+                        alt="Gelas Kaca">
+                    <!-- Play Icon Inside the Image -->
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="EkhxaQnl7FM" 
+                        class="btn btn-success rounded-circle position-absolute play-icon open-modal">
+                        <i class="bi bi-play-fill fs-4"></i>
+                    </button>
+                    <!-- Movie Info -->
+                    <div class="position-absolute bottom-0 start-0 text-white p-3 movie-info">
+                        <h4 class="fw-bold mb-1">Zona Merah</h4>
+                        <h5 class="mb-1">2024</h5>
+                        <p class="mb-0"><i class="bi bi-star-fill text-warning"></i> Rating 8.6</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movie Card 2 -->
+            <div class="col-md-6">
+                <div class="position-relative movie-card">
+                    <img src="assets/horizontal-poster/poster2.jpeg" class="img-fluid rounded w-100 large-poster"
+                        alt="The Perfect Stranger">
+                    <!-- Play Icon Inside the Image -->
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="lc0UehYemQA" 
+                    class="btn btn-success rounded-circle position-absolute play-icon open-modal">
+                        <i class="bi bi-play-fill fs-5"></i>
+                    </button>
+                    <!-- Movie Info -->
+                    <div class="position-absolute bottom-0 start-0 text-white p-3 movie-info">
+                        <h4 class="fw-bold mb-1">Jurassic Park</h4>
+                        <h5 class="mb-1">2024</h5>
+                        <p class="mb-0"><i class="bi bi-star-fill text-warning"></i> Rating 8.2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MAIN - Indonesian SERIES -->
+    <main class="container my-5 pt-5">
+        <h2 class="mb-3 fs-1 fw-bold">Indonesian Series</h2>
+        <div class="owl-carousel owl-theme">
+            <!-- Item 1 -->
+            <div class="item">
+                <img src="assets/poster/gadiskretek.jpg" alt="Film 5" class="img-fluid rounded m-md-3">
+            </div>
+
+            <div class="item">
+                <img src="assets/poster/nandday (1).jpg" alt="Film 1" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/diaangkasa.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/duawajahteknik.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/Cek_Toko_Sebelah_The_Series.jpeg" alt="Film 2" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/malmingmik.jpg" alt="Film 3" class="img-fluid rounded m-md-3">
+            </div>
+            <!-- Tambahkan item lainnya sesuai kebutuhan -->
+        </div>
+    </main>
+
+    <!-- MAIN - Internasional SERIES -->
+    <main class="container my-5 pt-5">
+        <h2 class="mb-3 fs-1 fw-bold">International Series</h2>
+        <div class="owl-carousel owl-theme">
+            <!-- Item 1 -->
+            <div class="item">
+                <img src="assets/poster/breakingbad.jpg" alt="Film 1" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/penguin.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/strangerthings.jpg" alt="Film 3" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/tlou.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/wandavision.jpg" alt="Film 5" class="img-fluid rounded m-md-3">
+            </div>
+            <div class="item">
+                <img src="assets/poster/uacademy.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
+            </div>
+            <!-- Tambahkan item lainnya sesuai kebutuhan -->
+        </div>
+    </main>
+
+
+
+
+    <!-- Footer Section -->
+    <footer class="text-white py-5" style="background-color: #39B54A;">
+        <div class="container mx-5 mb-4">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-md-8 text-start">
+                    <h1 class="fw-bold mb-0">Promax</h1>
+                    <p class="fw-semibold">Produksi Media To the Max</p>
+                    <h3>PROMAX is a dedicated platform for film lovers, offering <br> insightful reviews and exclusive
+                        trailers.</h3>
+                </div>
+                <div class="col-md-4 text-start">
+                    <h1 class="fw-bold">Contact Us</h1>
+                    <h4><i class="bi bi-envelope-fill"></i> <a href="mailto:promax.indonesia@gmail.com"
+                            class="text-white text-decoration-none fw-bold">promax.indonesia@gmail.com</a></h4>
+                    <h4><i class="bi bi-telephone-fill"></i> <a href="tel:+6281212567090"
+                            class="text-white text-decoration-none fw-bold">0812-1256-7090</a></h4>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Event untuk tombol open-modal
+            $(".open-modal").on("click", function () {
+                const videoId = $(this).data("video-id"); // Ambil ID video dari tombol
+                const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`; // URL YouTube
+                $("#youtubeVideo").attr("src", embedUrl); // Set URL iframe
+            });
+
+            // Event untuk membersihkan iframe saat modal ditutup
+            $("#youtubeModal").on("hidden.bs.modal", function () {
+                $("#youtubeVideo").attr("src", ""); // Kosongkan src untuk menghentikan video
+            });
+        });
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({
+                loop: true,               // Aktifkan looping
+                margin: 10,               // Jarak antar poster
+                center: true,             // Aktifkan item di tengah sebagai fokus
+                nav: false,               // Tidak menampilkan tombol navigasi
+                dots: false,              // Tidak menampilkan navigasi dot
+                autoplay: true,           // Aktifkan autoplay
+                autoplayTimeout: 3000,    // Durasi slide dalam ms
+                smartSpeed: 1500,         // Transisi antar slide
+                responsive: {
+                    0: {
+                        items: 1.5        // Tampilkan 1.5 poster pada layar kecil
+                    },
+                    576: {
+                        items: 2.5        // Tampilkan 2.5 poster pada layar sedang
+                    },
+                    768: {
+                        items: 3.5        // Tampilkan 3.5 poster pada layar medium
+                    },
+                    1024: {
+                        items: 4.4        // Tampilkan 5.5 poster pada layar besar
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    <!-- Bootstrap Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</body>
+
+</html>
