@@ -21,8 +21,6 @@
             /* Warna dasar hitam */
             color: white;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
         }
 
 
@@ -125,6 +123,7 @@
 
         /* SLIDER */
         .owl-carousel .item {
+            cursor: pointer;
             position: relative;
             text-align: center;
         }
@@ -146,7 +145,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="youtubeModalLabel">YouTube Video</h5>
+                    <h5 class="modal-title" id="youtubeModalLabel">Trailer Video</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -197,8 +196,8 @@
                                 Category
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./category.html">Horror</a></li>
-                                <li><a class="dropdown-item" href="./category.html">Drama</a></li>
+                                <li><a class="dropdown-item d-none" href="./category.html">Horror</a></li>
+                                <li><a class="dropdown-item d-none" href="./category.html">Drama</a></li>
                                 <li><a class="dropdown-item" href="./category.html">Thriller</a></li>
                             </ul>
                         </li>
@@ -275,23 +274,29 @@
         <h2 class="mb-3 fs-1 fw-bold">Indonesian Series</h2>
         <div class="owl-carousel owl-theme">
             <!-- Item 1 -->
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="PJybk11EIm8" 
+            class="item open-modal">
                 <img src="assets/poster/gadiskretek.jpg" alt="Film 5" class="img-fluid rounded m-md-3">
             </div>
 
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="sOXZ5Oetua8" 
+            class="item open-modal">
                 <img src="assets/poster/nandday (1).jpg" alt="Film 1" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="stcJW6Hx8Xc" 
+            class="item open-modal">
                 <img src="assets/poster/diaangkasa.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="ZBo0vjoJHhU" 
+            class="item open-modal">
                 <img src="assets/poster/duawajahteknik.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="hKHM5KsaWd0" 
+            class="item open-modal">
                 <img src="assets/poster/Cek_Toko_Sebelah_The_Series.jpeg" alt="Film 2" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="zcycoTRj_nQ" 
+            class="item open-modal">
                 <img src="assets/poster/malmingmik.jpg" alt="Film 3" class="img-fluid rounded m-md-3">
             </div>
             <!-- Tambahkan item lainnya sesuai kebutuhan -->
@@ -303,22 +308,28 @@
         <h2 class="mb-3 fs-1 fw-bold">International Series</h2>
         <div class="owl-carousel owl-theme">
             <!-- Item 1 -->
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="HhesaQXLuRY" 
+            class="item open-modal">
                 <img src="assets/poster/breakingbad.jpg" alt="Film 1" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="sfJG6IiA_s8" 
+            class="item open-modal">
                 <img src="assets/poster/penguin.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="b9EkMc79ZSU" 
+            class="item open-modal">
                 <img src="assets/poster/strangerthings.jpg" alt="Film 3" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="uLtkt8BonwM" 
+            class="item open-modal">
                 <img src="assets/poster/tlou.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="sj9J2ecsSpo" 
+            class="item open-modal">
                 <img src="assets/poster/wandavision.jpg" alt="Film 5" class="img-fluid rounded m-md-3">
             </div>
-            <div class="item">
+            <div type="button" data-bs-toggle="modal" data-bs-target="#youtubeModal" data-video-id="0DAmWHxeoKw" 
+            class="item open-modal">
                 <img src="assets/poster/uacademy.jpg" alt="Film 2" class="img-fluid rounded m-md-3">
             </div>
             <!-- Tambahkan item lainnya sesuai kebutuhan -->
@@ -400,8 +411,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </body>
 
 </html>
